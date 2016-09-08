@@ -1,0 +1,120 @@
+# -*- coding: utf-8 -*-
+debug = False
+# Credentials Mongo
+DBM_USER = ''
+DBM_PASSWORD = ''
+DBM_HOST = ''
+DBM_PORT = 
+DBM_DB = ''
+# Credentials AWS
+REGION = ''
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+BODY_SCHEMA_PROD = \
+{
+    "type": "object",
+    "properties": {
+        "from": {
+            "type": "string"
+        },
+        "subject": {
+            "type": "string"
+        },
+        "body": {
+            "type": "string"
+        },
+        "to": {
+            "type": "array"
+        },
+        "bcc": {
+            "type": "array"
+        },
+        "cc": {
+            "type": "array"
+        },
+        "files": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "file_name": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "checksum": {
+                        "type": "string"
+                    }
+                }, "required": ["checksum", "content", "file_name"], "additionalProperties": False
+            }
+        },
+        "token_app": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "from",
+        "subject",
+        "body",
+        "to",
+        "token_app"
+    ],
+    "additionalProperties": False
+}
+BODY_SCHEMA_TEST = \
+{
+    "type": "object",
+    "properties": {
+        "from": {
+            "type": "string"
+        },
+        "subject": {
+            "type": "string"
+        },
+        "body": {
+            "type": "string"
+        },
+        "to": {
+            "type": "array"
+        },
+        "bcc": {
+            "type": "array"
+        },
+        "cc": {
+            "type": "array"
+        },
+        "files": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "file_name": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    },
+                    "checksum": {
+                        "type": "string"
+                    }
+                }, "required": ["checksum", "content", "file_name"], "additionalProperties": False
+            }
+        },
+        "token_app": {
+            "type": "string"
+        },
+        "test_email_receiver": {
+            "type": "array"
+        }
+    },
+    "required": [
+        "from",
+        "subject",
+        "body",
+        "to",
+        "token_app",
+        "test_email_receiver"
+    ],
+    "additionalProperties": False
+}
