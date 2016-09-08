@@ -21,6 +21,10 @@ produces:
   - application/json; charse=utf-8
 consumes:
   - application/json; charse=utf-8
+security:
+  - OauthSecurity:
+      - sendmail
+      
 
 ################################################################################
 #                                           Paths                              #
@@ -189,6 +193,16 @@ paths:
             properties:
              error: 
                 description: "Internal Error"  
+################################################################################
+#                                           Security                              #
+################################################################################             
+securityDefinitions:
+  OauthSecurity:
+    type: oauth2
+    scopes:
+      sendmail: "Scope para enviar correos"
+    flow: application
+    tokenUrl: https://apis.digital.gob.cl/correo/v1/oauth2/token                
 
 ################################################################################
 #                                 Definitions                                  #
