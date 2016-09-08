@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 debug = False
+VERSION = ""
+PATH = ""
 # Credentials Mongo
 DBM_USER = ''
 DBM_PASSWORD = ''
