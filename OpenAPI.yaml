@@ -194,7 +194,7 @@ paths:
              error: 
                 description: "Internal Error"  
 ################################################################################
-#                                           Security                              #
+#                                           Security                           #
 ################################################################################             
 securityDefinitions:
   OauthSecurity:
