@@ -15,7 +15,7 @@ dbm = Connector_DBM(app.config['DBM_HOST'], app.config['DBM_PORT'], app.config[
 conn = BotoSES(app.config['REGION'], app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
 
 
-@app.route(app.config['PATH'] + '/' + app.config['VERSION'] + '/send', methods=['POST'])
+@app.route('/' + app.config['PATH'] + '/' + app.config['VERSION'] + '/send', methods=['POST'])
 def api_send():
     # Check Content-Type, Body and required keys in json body
     try:
@@ -74,7 +74,7 @@ def api_send():
     else:
         return response().trace_error_in_dbm()
 
-@app.route(app.config['PATH'] + '/' + app.config['VERSION'] +  '/send-test', methods=['POST'])
+@app.route('/' + app.config['PATH'] + '/' + app.config['VERSION'] +  '/send-test', methods=['POST'])
 def api_send_test():
     # Check Content-Type, Body and required keys in json body
     try:
