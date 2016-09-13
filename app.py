@@ -6,6 +6,11 @@ from responses import response
 from utils_ses import BotoSES
 from utils import check_body, MIME_utils, check_checksum
 
+#Default Encode
+import sys
+reload(sys)  # Reload does the trick!
+sys.setdefaultencoding('UTF8')
+
 # init app
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
