@@ -259,6 +259,29 @@ definitions:
             - file_name
             - content
             - checksum
+      images:
+        type: array      
+        items:
+          type: object
+          properties:
+            file_name:
+              type: string
+              description: "nombre del archivo con su extension"
+            content:
+              type: string
+              format: base64
+              description: "Archivo encodeado en base64"              
+            checksum:
+              type: string
+              format: sha256
+            id:
+              type: string
+              description: "Content-ID Header -> example: if id=image1 then <img src='cid:image1'>"
+          required:
+            - file_name
+            - content
+            - checksum            
+            - id            
   body_api_correo_test:
     type: object
     required:
@@ -310,5 +333,29 @@ definitions:
             - file_name
             - content
             - checksum
+      images:
+        type: array      
+        items:
+          type: object
+          properties:
+            file_name:
+              type: string
+              description: "nombre del archivo con su extension"
+            content:
+              type: string
+              format: base64
+              description: "Archivo encodeado en base64"              
+            checksum:
+              type: string
+              format: sha256
+            id:
+              type: string              
+          required:
+            - file_name
+            - content
+            - checksum            
+            - id
       test_email_receiver:            
-        type: string
+        type: array
+        items:
+          type: string
