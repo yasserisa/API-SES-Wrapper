@@ -3,7 +3,9 @@ from jsonschema import validate
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
 import hashlib
+
 
 class check_body:
 
@@ -59,10 +61,20 @@ class MIME_utils:
         msg.attach(part2)
         try:
             # The attachment
-            for file_attach in body['files']:
-                part3 = MIMEApplication(file_attach['content'].decode('base64'))
-                part3.add_header('Content-Disposition', 'attachment', filename=file_attach['file_name'])
-                msg.attach(part3)
-                return msg
+            if "files" in body:
+                for file_attach in body['files']:
+                    part3 = MIMEApplication(file_attach['content'].decode('base64'))
+                    part3.add_header('Content-Disposition', 'attachment', filename=file_attach['file_name'])
+                    msg.attach(part3)
         except:
             return msg
+        try:
+            # The attachment
+            if "images" in body:
+                for file_attach in body['images']:
+                    part4 = MIMEImage(file_attach['content'].decode('base64'))
+                    part4.add_header('Content-ID', '<' + file_attach['id'] + '>')
+                    msg.attach(part4)
+        except:
+            return msg
+        return msg

@@ -5,8 +5,7 @@ from dbm import Connector_DBM
 from responses import response
 from utils_ses import BotoSES
 from utils import check_body, MIME_utils, check_checksum
-
-#Default Encode
+# Default Encode
 import sys
 reload(sys)  # Reload does the trick!
 sys.setdefaultencoding('UTF8')
@@ -39,10 +38,20 @@ def api_send():
     if "files" in body:
         if not check_checksum().check_sha256_file(body['files']):
             return response().checksum_error()
+    if "images" in body:
+        if not check_checksum().check_sha256_file(body['images']):
+            return response().checksum_error()
     # Delete key Files to insert in DBM
     try:
         insert = body.copy()
-        del insert['files']
+        try:
+            del insert['files']
+        except:
+            pass
+        try:
+            del insert['images']
+        except:
+            pass
         del insert['body']
     except:
         pass
@@ -79,7 +88,8 @@ def api_send():
     else:
         return response().trace_error_in_dbm()
 
-@app.route('/' + app.config['PATH'] + '/' + app.config['VERSION'] +  '/send-test', methods=['POST'])
+
+@app.route('/' + app.config['PATH'] + '/' + app.config['VERSION'] + '/send-test', methods=['POST'])
 def api_send_test():
     # Check Content-Type, Body and required keys in json body
     try:
@@ -98,10 +108,20 @@ def api_send_test():
     if "files" in body:
         if not check_checksum().check_sha256_file(body['files']):
             return response().checksum_error()
+    if "images" in body:
+        if not check_checksum().check_sha256_file(body['images']):
+            return response().checksum_error()
     # Delete key Files to insert in DBM
     try:
         insert = body.copy()
-        del insert['files']
+        try:
+            del insert['files']
+        except:
+            pass
+        try:
+            del insert['images']
+        except:
+            pass
         del insert['body']
     except:
         pass
